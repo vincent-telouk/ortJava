@@ -1,0 +1,4 @@
+com\ort\managedbeans\VehiculeBean.class
+com\ort\models\MongoClientProvider.class
+com\ort\beans\Vehicule.class
+com\ort\models\VehiculeModel.class

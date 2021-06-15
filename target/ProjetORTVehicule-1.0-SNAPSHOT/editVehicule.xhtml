@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Formulaire d'édition de véhicule
+
+        <p:messages/>
+        <h:form>
+            <p:panelGrid columns="2">
+                Immatriculation : <p:inputText value="#{vehiculeBean.vehicule.immatriculation}" required="true" label="Immatriculation"/>
+                Description : <p:inputText value="#{vehiculeBean.vehicule.description}" required="true" label="Description"/>
+                Date d'achat : <p:datePicker value="#{vehiculeBean.vehicule.dateAchat}" required="true" label="Date d'achat"/>
+                Tarif : <p:inputText value="#{vehiculeBean.vehicule.tarifActuel}"/>
+                Kilométrage : <p:inputText value="#{vehiculeBean.vehicule.kilometrage}"> <f:validateLength minimum="2" maximum="6" /></p:inputText>
+                <h:commandButton action="#{vehiculeBean.edit()}" value="edit"/>
+            </p:panelGrid>
+        </h:form>
+
+        <h:form>
+            <p:dataTable value="#{vehiculeBean.listeVehicule}" var="toto" paginator="true" rows="10">
+                <f:facet name="header">Liste des véhicules</f:facet>
+                <p:column headerText="ObjectId">
+                    <h:outputText value="#{toto.id}"/>
+                </p:column>
+                <p:column headerText="Immatriculation" filterBy="#{toto.immatriculation}">
+                    <h:outputText value="#{toto.immatriculation}"/>
+                </p:column>
+                <p:column headerText="Description">
+                    <h:outputText value="#{toto.description}" />
+                </p:column>
+                <p:column headerText="Date d'achat">
+                    <h:outputText value="#{toto.dateAchat}"><f:convertDateTime pattern="dd/MM/YYYY"/></h:outputText>
+                </p:column>
+                <p:column headerText="Tarif">
+                    <h:outputText value="#{toto.tarifActuel}" />
+                </p:column>
+                <p:column headerText="Kilometrage">
+                    <h:outputText value="#{toto.kilometrage}" />
+                </p:column>
+                <p:column headerText="Gestion">
+                    <p:commandButton action="#{vehiculeBean.clickEdit(toto)}"  ajax="false" icon="fa fa-fw fa-pencil"/>
+                    <p:commandButton action="#{vehiculeBean.delete(toto)}"  ajax="false" icon="fa fa-fw fa-trash"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
